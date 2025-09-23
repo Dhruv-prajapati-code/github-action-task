@@ -12,7 +12,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Debug Docker Hub username
-              run: echo "Docker Hub username is ${{ vars.DOCKERHUB_USERNAME }}, sec is = ${{ secrets.DOCKERHUB_TOKEN }} "
+              run: echo "Docker Hub username is ${{ vars.DOCKERHUB_USERNAME }}, sec is  == ${{ secrets.DOCKERHUB_TOKEN }} "
               
             -
                 name: login to docker hub

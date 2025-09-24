@@ -27,7 +27,7 @@ jobs:
                 name: Check file & first add
                 id: check
                 run: |
-                  if [ "${{ github.ref }}" = "refs/head/main" ]; then
+                  if [ "${{ github.ref }}" = "refs/heads/main" ]; then
                    echo "change=true" >> $GITHUB_OUTPUT
                   else
                      if git diff --name-only ${{ github.sha }}~1 | grep -q ${{ matrix.file }}; then

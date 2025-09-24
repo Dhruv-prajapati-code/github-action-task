@@ -60,4 +60,31 @@ jobs:
                 if: steps.check.outputs.change == 'true' 
                 run: docker push "dhruvprajapaticode/app:${{ matrix.tags }}"
 
+                
+            - 
+                name: Install Trivy
+                uses: aquasecurity/trivy-action@v0.33.1
+                with:
+                    image-ref: dhruvprajapaticode/app:${{ matrix.tags }}
+                    format: table
+                    exit-code: 0
+                    vuln-type: os,library
+                    ignore-unfixed: false
+                    severity: CRITICAL,HIGH,MEDIUM,LOW
+                    scan-ref: "docker"
+            
+            -
+                name: Scan with trivy
+                run: |
+                  trivy image --format json -o trivy-"${{ matrix.tags }}" "dhruvprajapaticode/app:${{ matrix.tags }}"
+                  trivy image --format table "dhruvprajapaticode/app:${{ matrix.tags }}"
+            -
+                name: Upload trivy file
+                uses: actions/upload-artifact@v4
+                with:
+                    name: trivy-artifact-${{ matrix.tags }}
+                    path: trivy-${{ matrix.tags }}
+
+
+
 

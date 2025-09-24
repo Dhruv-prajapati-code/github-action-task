@@ -26,6 +26,6 @@ jobs:
                 with:
                     file: ./dockerfile.dev
                     push: true
-                    tags: user/app:dev
+                    tags: dhruvprajapaticode/dev
 
 
